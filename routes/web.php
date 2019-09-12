@@ -8,6 +8,9 @@ Route::group(['middleware'=>'auth.api'],function(){
     Route::get('/', 'Home@index')->name('home');
     Route::get('/home', 'Home@index')->name('home');
 
+    Route::get('/admin', 'Api\ApiAcl@index')->name('admin');
+    Route::post('/admin/roles', 'Api\ApiAcl@createRoles')->name('roles.create');
+
     Route::resource('/inscripciones', 'Inscripciones');
 });
 
