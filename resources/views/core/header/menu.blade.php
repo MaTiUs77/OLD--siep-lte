@@ -1,14 +1,6 @@
-<!-- Alta de personas-->
-<li><a href="#">Alta de personas</a></li>
-
-<!-- Usuarios -->
-<li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuarios <span class="caret"></span></a>
-    <ul class="dropdown-menu" role="menu">
-        <li><a href="#">Agentes</a></li>
-        <li><a href="#">Usuarios</a></li>
-    </ul>
-</li>
+@rol('superadmin')
+<li><a href="{{ route('admin') }}">Administracion</a></li>
+@enduser
 
 <!-- Ofertas -->
 <li class="dropdown">
@@ -21,7 +13,7 @@
 </li>
 
 <!-- Alumnado -->
-<li class="dropdown active">
+<li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Alumnado <span class="caret"></span></a>
     <ul class="dropdown-menu" role="menu">
         <li class="active"><a href="{{ url('inscripciones') }}">Inscripciones</a></li>

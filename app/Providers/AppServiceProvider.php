@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Http\Controllers\Api\ApiLogin;
+use App\Http\Controllers\Api\Util\BladeHelper;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -31,15 +31,15 @@ class AppServiceProvider extends ServiceProvider
         }
 
         Blade::if('user', function () {
-            return ApiLogin::bladeUser();
+            return BladeHelper::bladeUser();
         });
 
         Blade::if('rol', function ($rol) {
-            return ApiLogin::bladeRol($rol);
+            return BladeHelper::bladeRol($rol);
         });
 
         Blade::if('permiso', function ($permiso) {
-            return ApiLogin::bladePermiso($permiso);
+            return BladeHelper::bladePermiso($permiso);
         });
     }
 }

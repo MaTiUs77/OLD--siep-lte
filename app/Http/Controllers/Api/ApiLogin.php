@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
-use Illuminate\Support\Facades\Log;
 
 class ApiLogin extends Controller
 {
@@ -82,26 +81,11 @@ class ApiLogin extends Controller
         return $req;
     }
 
-    // Blade AppServiceProvide
-    public static function bladeRol($rol) {
-        $user = session('user');
-        $roles = $user['acl']['roles'];
-        $access = collect($roles)->contains($rol);
-        return $access;
+    // Static utils
+    public static function user() {
+        return session('user');
     }
-
-    public static function bladePermiso($permiso) {
-        $user = session('user');
-        $permisos = $user['acl']['permisos'];
-        $access = collect($permisos)->contains($permiso);
-        return $access;
-    }
-
-    public static function bladeUser() {
-        if(session('user') === null) {
-            return false;
-        } else {
-            return true;
-        }
+    public static function token() {
+        return session('token');
     }
 }

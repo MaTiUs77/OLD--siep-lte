@@ -3,14 +3,18 @@ Route::get('/login', 'Api\ApiLogin@index')->name('login');
 Route::post('/login', 'Api\ApiLogin@start')->name('login');
 Route::get('/logout', 'Api\ApiLogin@logout')->name('logout');
 
-// Rutas con autentificacion
+//--- Rutas con autentificacion ---//
 Route::group(['middleware'=>'auth.api'],function(){
-    Route::get('/', 'Home@index')->name('home');
-    Route::get('/home', 'Home@index')->name('home');
+    Route::get('/', 'View\Home@index')->name('home');
+    Route::get('/home', 'View\Home@index')->name('home');
 
-    Route::get('/admin', 'Api\ApiAcl@index')->name('admin');
-    Route::post('/admin/roles', 'Api\ApiAcl@createRoles')->name('roles.create');
 
-    Route::resource('/inscripciones', 'Inscripciones');
+    //--- Rutas de pagina ADMIN ---//
+    Route::prefix('admin')->group(function () {
+        Route::get('/', 'View\Admin\Admin@index')->name('admin');
+        Route::resource('/roles', 'View\Admin\AdminRoles');
+    });
+
+    Route::resource('inscripciones', 'View\Inscripciones');
 });
-
+//--- End Rutas con autentificacion ---//

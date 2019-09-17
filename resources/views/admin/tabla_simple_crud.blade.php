@@ -1,12 +1,17 @@
 @php
     $route = strtolower($titulo);
 @endphp
-
+@if(isset($items['error']))
+    <p>
+        Respuesta de API
+    </p>
+    <code>{{ $items['error'] }}</code>
+@else
 <div class="box">
   <div class="box-header">
       <h3 class="box-title">{{ $titulo }} en total: {{ count($items) }}</h3>
       <div class="box-tools">
-          <form method="POST" action="{{ route('roles.create') }}">
+          <form method="POST" action="{{ route('roles.store') }}">
           @csrf
             <div class="input-group input-group-sm hidden-xs" style="width: 200px;">
                   <input type="text" name="name" class="form-control pull-right" placeholder="Ingresar nombre">
@@ -33,10 +38,10 @@
                     <td style="width: 50px">{{ $item['id'] }}</td>
                     <td>{{ $item['name'] }}</td>
                     <td style="width: 50px">
-                        <a href="{{ url("acl/{$route}/edit",$item['id']) }}" class="btn btn-sm btn-default btn-block"><i class="fa fa-edit"></i></a>
+                        <a href="{{ url("admin/{$route}/delete",$item['id']) }}" class="btn btn-sm btn-default btn-block"><i class="fa fa-edit"></i></a>
                     </td>
                     <td style="width: 50px">
-                        <a href="{{ url("acl/{$route}/delete",$item['id']) }}" class="btn btn-sm btn-danger btn-block"><i class="fa fa-trash"></i></a>
+                        <a href="{{ url("admin/{$route}/delete",$item['id']) }}" class="btn btn-sm btn-danger btn-block"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
               @endforeach
@@ -45,3 +50,4 @@
   </div>
   <!-- /.box-body -->
 </div>
+@endif

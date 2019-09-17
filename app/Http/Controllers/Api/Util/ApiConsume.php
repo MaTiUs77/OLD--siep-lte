@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Util;
 
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
@@ -14,9 +14,11 @@ class ApiConsume extends Controller
     private $route;
     private $consume_route;
 
+    private $headers = [];
+    private $status = [];
+
     private $error;
     private $response;
-    private $headers = [];
 
     public function __construct($host=null)
     {
@@ -50,7 +52,7 @@ class ApiConsume extends Controller
     public function cakeHeader() {
         $this->headers['headers'][env('XHOSTCAKE')] = 'do';
     }
-    public function bearerHeader($token) {
+    public function tokenHeader($token) {
         $this->headers['headers']['Authorization'] = "Bearer {$token}";
     }
 
@@ -83,32 +85,29 @@ class ApiConsume extends Controller
             return $this;
         }
 
-        $req['api_consume'] = [
-            'route'=>$this->route
-        ];
 
         if(isset($req['error'])) {
-            $req['api_consume']['request'] = 'error';
+            $this->status = 'error';
             $this->error = $req;
         } else {
-            $req['api_consume']['request'] = 'done';
+            $this->status = 'done';
             $this->response = $req;
         }
 
         return $this;
     }
 
-    public function get($uri,$params)
+    public function get($uri,$params=[])
     {
         return $this->request('GET',$uri,$params);
     }
 
-    public function post($uri,$params)
+    public function post($uri,$params=[])
     {
         return $this->request('POST',$uri,$params);
     }
 
-    public function delete($uri,$params)
+    public function delete($uri,$params=[])
     {
         return $this->request('DELETE',$uri,$params);
     }
