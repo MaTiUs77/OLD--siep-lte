@@ -13,11 +13,13 @@ class ApiMatriculasCuantitativas extends Controller
         $this->token = $token;
     }
 
-    public function getPorNivel($ciclo)
+    public function getPorNivel($ciclo,$query=[])
     {
         $params = [
             'ciclo' => $ciclo
         ];
+
+        $params = array_merge($params,$query);
 
         $api = new ApiConsume();
         $api->get("api/v1/matriculas/cuantitativa/por_nivel",$params);
