@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers\View;
 
+use App\Http\Controllers\Api\ApiCiclos;
+use App\Http\Controllers\Api\ApiLogin;
 use App\Http\Controllers\Api\Util\ApiConsume;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -21,15 +23,26 @@ class Inscripciones extends Controller
         }
 
         $params = request()->all();
-        $default['ciclo'] = $ciclo;
-        $params = array_merge($params,$default);
+        $default = [
+            'ciclo' => $ciclo,
+            'estado_inscripcion' => 'CONFIRMADA'
+        ];
+        $params = array_merge($default,$params);
 
         $api = new ApiConsume();
         $api->get("api/v1/inscripcion/lista",$params);
         if($api->hasError()) { return $api->getError(); }
         $inscripciones = $api->response();
 
-        $data = compact('inscripciones','ciclo');
+        // Todos los ciclos
+        $token = ApiLogin::token();
+        $apiCiclos = new ApiCiclos($token);
+        $ciclos = $apiCiclos->getAll();
+        $ciclos =  $ciclos['ciclos'];
+
+        $data = compact('inscripciones','ciclo','ciclos');
+        $data['estado_inscripcion'] = $params['estado_inscripcion'];
+
         return view('inscripciones.index',$data);
     }
 

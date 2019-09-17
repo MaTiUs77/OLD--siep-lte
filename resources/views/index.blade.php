@@ -37,7 +37,12 @@
                                 <div class="icon">
                                     <i class="fa fa-user"></i>
                                 </div>
-                                <a href="{{ route('inscripciones.index',['ciclo'=>$ciclo,'ciudad'=>$ciudad,'nivel_servicio'=>$item['nivel_servicio']]) }}" class="small-box-footer">
+                                <a href="{{ route('inscripciones.index',[
+                                    'ciclo'=>$ciclo,
+                                    'ciudad'=>$ciudad,
+                                    'nivel_servicio'=>$item['nivel_servicio'],
+                                    'estado_inscripcion'=>$estado_inscripcion
+                                    ]) }}" class="small-box-footer">
                                     Ampliar información <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -53,38 +58,9 @@
             </div>
             <!-- /.col  -->
             <div class="col-md-3">
-                <div class="box box-solid">
-                    <form method="GET" action="{{ route('home') }}">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Filtros</h3>
-                    </div>
-                    <div class="box-body">
-                        <div class="form-group">
-                            <label>Ciclo</label>
-                            <select name="ciclo" class="form-control">
-                                @foreach($ciclos as $item)
-                                    <option value="{{ $item['nombre'] }}" @if($item['nombre']==$ciclo) selected="selected" @endif>{{ $item['nombre'] }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Estado inscripcion</label>
-                            <select name="estado_inscripcion" class="form-control">
-                                <option value="CONFIRMADA" @if($estado_inscripcion=='CONFIRMADA') selected="selected" @endif>CONFIRMADA</option>
-                                <option value="NO CONFIRMADA" @if($estado_inscripcion=='NO CONFIRMADA') selected="selected" @endif>NO CONFIRMADA</option>
-                                <option value="BAJA" @if($estado_inscripcion=='BAJA') selected="selected" @endif>BAJA</option>
-                            </select>
-                        </div>
-                    </div>
-                    <!-- /.box-body -->
-                    <div class="box-footer">
-                        <button type="submit" class="btn btn-success pull-right">Aplicar</button>
-                    </div>
-                    <!-- /.box-footer-->
-                    </form>
-                </div>
-                <!-- /. box -->
+                @include('sidebar_filtros',[
+                    'action' => route('home')
+                ])
             </div>
             <!-- /.col  -->
         </div>

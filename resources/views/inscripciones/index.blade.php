@@ -52,34 +52,9 @@
                       <!-- /.box-body -->
                   </div>
 
-                  <div class="box box-solid">
-                      <div class="box-header with-border">
-                          <h3 class="box-title">Busqueda</h3>
-
-                          <div class="box-tools">
-                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                              </button>
-                          </div>
-                      </div>
-                      <div class="box-body">
-                          <div class="form-group">
-                              <label>Ciclo</label>
-                              <select class="form-control">
-                                  <option>2017</option>
-                                  <option>2018</option>
-                                  <option>2019</option>
-                                  <option>2020</option>
-                              </select>
-                          </div>
-                      </div>
-                      <!-- /.box-body -->
-
-                      <div class="box-footer">
-                          <button type="submit" class="btn btn-default">Cancelar</button>
-                          <button type="submit" class="btn btn-info pull-right">Aplicar</button>
-                      </div>
-                      <!-- /.box-footer-->
-                  </div>
+                  @include('sidebar_filtros',[
+                    'action' => route('inscripciones.index')
+                  ])
                   <!-- /. box -->
                   <div class="box box-solid">
                       <div class="box-header with-border">
