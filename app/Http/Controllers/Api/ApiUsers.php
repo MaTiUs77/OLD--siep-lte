@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Api\Util\ApiConsume;
 use App\Http\Controllers\Controller;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\BadResponseException;
 
 class ApiUsers extends Controller
 {
@@ -16,29 +15,13 @@ class ApiUsers extends Controller
 
     public function getAll()
     {
-        $authRoute = env('SIEP_AUTH_API') . '/acl/users';
-        $params = [
-            'token' => $this->token
-        ];
+        $api = new ApiConsume(env('SIEP_AUTH_API'));
+        $api->tokenHeader(ApiLogin::token());
+        $params['page'] = request('users_page');
+        $api->get("acl/users",$params);
+        if($api->hasError()) { return $api->getError(); }
+        $response = $api->response();
 
-        $pagina = request('pagina');
-        if (is_numeric($pagina)) {
-            $params['page'] = $pagina;
-        }
-
-        try {
-            $guzzle = new Client();
-            $consumeApi = $guzzle->request('get', $authRoute, ['query' => $params]);
-
-            // Obtiene el contenido de la respuesta, la transforma a json
-            $content = $consumeApi->getBody()->getContents();
-            $req = json_decode($content, true);
-        } catch (BadResponseException $ex) {
-            $content = $ex->getResponse();
-            $error = json_decode($content->getBody(), true);
-            return $error;
-        }
-
-        return $req;
+        return $response;
     }
 }

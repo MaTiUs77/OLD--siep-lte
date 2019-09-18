@@ -51,6 +51,10 @@
           @endforeach
           </tbody>
       </table>
+
+      @include('core.pagination',[
+        'data' => $inscripciones
+      ])
   </div>
   <!-- /.box-body -->
 </div>
