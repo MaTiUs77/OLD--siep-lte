@@ -53,6 +53,12 @@
                 @endforeach
                 </tbody>
             </table>
+
+            @include('core.pagination',[
+              'data' => $items,
+              'page_link' => 'users_page'
+            ])
+
         </div>
         <!-- /.box-body -->
     </div>
