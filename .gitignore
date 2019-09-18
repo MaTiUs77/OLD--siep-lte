@@ -14,3 +14,5 @@ yarn-error.log
 supervisord\.pid
 
 supervisord\.log
+
+storage/app/public/master\.json

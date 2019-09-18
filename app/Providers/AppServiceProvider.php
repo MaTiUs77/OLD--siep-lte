@@ -30,6 +30,10 @@ class AppServiceProvider extends ServiceProvider
             $url->forceScheme('https');
         }
 
+        Blade::directive('gitversion', function () {
+            return BladeHelper::bladeGitBuild();
+        });
+
         Blade::if('user', function () {
             return BladeHelper::bladeUser();
         });
