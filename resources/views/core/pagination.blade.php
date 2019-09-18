@@ -2,7 +2,12 @@
     if(!isset($page_link)) {
         $page_link = 'page';
     }
+
+    if(isset($data['meta'])) {
+        $data = $data['meta'];
+    }
 @endphp
+@if($data['last_page']>1)
 <div class="text-center">
     <ul class="pagination">
     @for ($i = 1; $i <= $data['last_page']; $i++)
@@ -57,3 +62,4 @@
         Pagina <b>{{ $data['current_page'] }}</b> de <b>{{ $data['last_page'] }}</b>
     </p>
 </div>
+@endif

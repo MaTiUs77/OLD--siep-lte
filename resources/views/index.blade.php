@@ -19,6 +19,7 @@
                     <p>No se encontraron resultados con el filtro aplicado.</p>
                 </div>
             @endif
+
             @foreach($matPorNivel->sortBy('nivel_servicio')->groupBy('ciudad') as $ciudad => $items)
                 <div class="box">
                     <div class="box-header">
@@ -29,10 +30,20 @@
                         @foreach($items as $item)
                             <div class="col-md-4">
                             <!-- small box -->
-                            <div class="small-box bg-aqua">
+                                @php
+                                    $boxColor = '';
+                                    switch($estado_inscripcion) {
+                                    case 'BAJA': $boxColor = 'bg-red'; break;
+                                    case 'CONFIRMADA': $boxColor = 'bg-green'; break;
+                                    case 'NO CONFIRMADA': $boxColor = 'bg-yellow'; break;
+                                    default: $boxColor = 'bg-aqua'; break;
+                                    }
+                                @endphp
+                            <div class="small-box {{ $boxColor }}">
                                 <div class="inner">
                                     <h3>{{ $item['matriculas'] }}</h3>
                                     <p>{{ $item['nivel_servicio'] }}</p>
+                                    <p>{{ $estado_inscripcion }}</p>
                                 </div>
                                 <div class="icon">
                                     <i class="fa fa-user"></i>
@@ -61,6 +72,32 @@
                 @include('sidebar_filtros',[
                     'action' => route('home')
                 ])
+
+                <h4>Total por localidad</h4>
+                @foreach($matPorNivel->sortBy('nivel_servicio')->groupBy('ciudad') as $ciudad => $items)
+                        <div class="info-box">
+                            <span class="info-box-icon bg-aqua"><i class="fa fa-map-marker"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">{{ $ciudad }}</span>
+                                <span class="info-box-number">{{ collect($items)->sum('matriculas') }}</span>
+                                <span class="info-box-text">{{ $estado_inscripcion }}</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                @endforeach
+
+                <h4>Total por nivel</h4>
+                @foreach($matPorNivel->sortBy('nivel_servicio')->groupBy('nivel_servicio') as $nivel_servicio=> $items)
+                        <div class="info-box">
+                            <span class="info-box-icon bg-aqua"><i class="fa fa-signal"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">{{ $nivel_servicio }}</span>
+                                <span class="info-box-number">{{ collect($items)->sum('matriculas') }}</span>
+                                <span class="info-box-text">{{ $estado_inscripcion }}</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                @endforeach
             </div>
             <!-- /.col  -->
         </div>
