@@ -30,7 +30,7 @@
           </tr>
           @foreach($data['data'] as $dt)
           <tr>
-              <td>@isset($dt['centro']['nombre']) {{ $dt['centro']['nombre'] }} @else --- @endisset</td>
+              <td>{{ $dt['centro']['nombre'] }}</td>
               <td>{{ $dt['anio'] }}</td>
               <td>{{ $dt['division'] }}</td>
               <td>{{ $dt['turno'] }}</td>
