@@ -16,5 +16,9 @@ Route::group(['middleware'=>'auth.api'],function(){
     });
 
     Route::resource('inscripciones', 'View\Inscripciones');
+    Route::resource('promocionados', 'View\Promocionados');
+    Route::resource('repitentes', 'View\Repitentes');
+
+    Route::resource('secciones', 'View\Secciones');
 });
 //--- End Rutas con autentificacion ---//

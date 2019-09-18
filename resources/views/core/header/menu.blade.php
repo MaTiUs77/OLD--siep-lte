@@ -8,7 +8,7 @@
     <ul class="dropdown-menu" role="menu">
         <li><a href="#">Ciclos</a></li>
         <li><a href="#">Titulaciones</a></li>
-        <li><a href="#">Secciones</a></li>
+        <li><a href="{{ route('secciones.index') }}">Secciones</a></li>
     </ul>
 </li>
 
@@ -30,8 +30,8 @@
         <li><a href="#">Alumnos por seccion</a></li>
         <li><a href="#">Ingresantes 2019</a></li>
         <li><a href="#">Inscripciones 2019</a></li>
-        <li><a href="#">Promocionados</a></li>
-        <li><a href="#">Repitentes</a></li>
+        <li><a href="{{ route('promocionados.index') }}">Promocionados</a></li>
+        <li><a href="{{ route('repitentes.index') }}">Repitentes</a></li>
         <li><a href="#">Ingresantes 2020</a></li>
     </ul>
 </li>
