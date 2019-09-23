@@ -19,6 +19,7 @@ Route::group(['middleware'=>'auth.api'],function(){
     Route::resource('promocionados', 'View\Promocionados');
     Route::resource('repitentes', 'View\Repitentes');
 
+    Route::resource('centros', 'View\Centros');
     Route::resource('secciones', 'View\Secciones');
 });
 //--- End Rutas con autentificacion ---//

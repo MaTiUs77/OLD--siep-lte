@@ -1,6 +1,8 @@
 <div class="box box-primary">
     <div class="box-body box-profile">
-        <h3 class="profile-username text-center">{{ $seccion['centro']['nombre'] }}</h3>
+        <h3 class="profile-username text-center">
+            <a href="{{ route('centros.show',$seccion['centro']['id']) }}">{{ $seccion['centro']['nombre'] }}</a>
+        </h3>
 
         <ul class="list-group">
             <li class="list-group-item">

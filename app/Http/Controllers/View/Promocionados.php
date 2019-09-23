@@ -12,7 +12,7 @@ class Promocionados extends Controller
 {
     public function index()
     {
-        $ciclo = 2018;
+        $ciclo = Carbon::now()->year;
 
         if(request('ciclo')) {
             $ciclo =  request('ciclo');

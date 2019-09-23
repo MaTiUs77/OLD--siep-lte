@@ -2,15 +2,8 @@
 <li><a href="{{ route('admin') }}">Administracion</a></li>
 @enduser
 
-<!-- Ofertas -->
-<li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ofertas <span class="caret"></span></a>
-    <ul class="dropdown-menu" role="menu">
-        <li><a href="#">Ciclos</a></li>
-        <li><a href="#">Titulaciones</a></li>
-        <li><a href="{{ route('secciones.index') }}">Secciones</a></li>
-    </ul>
-</li>
+<li class="{{request()->is('centros*') ? ' active' : ''}}"><a href="{{ route('centros.index') }}">Centros</a></li>
+<li class="{{request()->is('secciones*') ? ' active' : ''}}"><a href="{{ route('secciones.index') }}">Secciones</a></li>
 
 <!-- Alumnado -->
 <li class="dropdown">
