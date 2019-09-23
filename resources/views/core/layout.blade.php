@@ -27,6 +27,9 @@
   <!-- Daterange picker -->
   <link rel="stylesheet" href="{{ asset('lte/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
 
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{ asset('lte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -85,7 +88,11 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('lte/dist/js/demo.js') }}"></script>
 
-@yield('footer_js')
+<!-- DataTables -->
+<script src="{{ asset('lte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('lte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+
+@yield('endjs')
 </body>
 </html>
 

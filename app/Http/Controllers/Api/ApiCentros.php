@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Api\Util\ApiConsume;
 use App\Http\Controllers\Controller;
 
-class ApiMatriculasCuantitativas extends Controller
+class ApiCentros extends Controller
 {
     public $token;
     public function __construct($token)
@@ -13,20 +13,28 @@ class ApiMatriculasCuantitativas extends Controller
         $this->token = $token;
     }
 
-    public function getPorNivel($params=[])
+    public function getAll($params=[])
     {
         $api = new ApiConsume();
-        $api->get("api/v1/matriculas/cuantitativa/por_nivel",$params);
+        $default = [
+
+        ];
+        $params = array_merge($default,$params);
+        $api->get("api/v1/centros",$params);
         if($api->hasError()) { return $api->getError(); }
         $response = $api->response();
 
         return $response;
     }
 
-    public function getPorSeccion($params=[])
+    public function getId($id,$params=[])
     {
         $api = new ApiConsume();
-        $api->get("api/v1/matriculas/cuantitativa/por_seccion",$params);
+        $default = [
+        ];
+        $params = array_merge($default,$params);
+
+        $api->get("api/v1/centros/{$id}",$params);
         if($api->hasError()) { return $api->getError(); }
         $response = $api->response();
 
