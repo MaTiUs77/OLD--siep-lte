@@ -15,6 +15,9 @@
                 <b>Turno</b> <a class="pull-right">{{ $seccion['turno'] }}</a>
             </li>
             <li class="list-group-item">
+                <b>Plazas</b> <a class="pull-right">{{ $seccion['plazas'] }}</a>
+            </li>
+            <li class="list-group-item">
                 <b>Tipo</b> <a class="pull-right">{{ $seccion['tipo'] }}</a>
             </li>
         </ul>

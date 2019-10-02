@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ApiLogin;
 use App\Http\Controllers\Api\ApiMatriculasCuantitativas;
 use App\Http\Controllers\Api\ApiRepitentes;
 use App\Http\Controllers\Api\ApiSecciones;
+use App\Http\Controllers\Api\Util\BladeHelper;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 
@@ -14,23 +15,26 @@ class Secciones extends Controller
 {
     public function index()
     {
+        //$ciclo = Carbon::now()->year;
+        $ciclo = 2020;
+
         $params = request()->all();
         $default = [
             'por_pagina' => 10,
-            'ciclo' => Carbon::now()->year,
+            'ciclo' => $ciclo,
             'estado_inscripcion'=> 'CONFIRMADA',
             'division'=> 'con',
             'order'=> 'anio',
             'order_dir'=> 'asc'
         ];
+
         $params = array_merge($default,$params);
 
         $token = ApiLogin::token();
         $api = new ApiMatriculasCuantitativas($token);
         $secciones = $api->getPorSeccion($params);
 
-        $data = compact('secciones');
-
+        $data = compact('ciclo','secciones');
         return view('secciones.index',$data);
     }
 

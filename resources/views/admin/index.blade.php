@@ -29,6 +29,8 @@
                       @include('admin.tabla_user_crud',[
                       'titulo' => 'Usuarios',
                       'items' => $users,
+                      'table_name' => 'users',
+                      'resource' => 'users',
                       ])
                   </div>
                   <!-- /.tab-pane -->

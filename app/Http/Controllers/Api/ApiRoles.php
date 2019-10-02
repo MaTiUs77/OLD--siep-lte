@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Api\Util\ApiConsume;
 use App\Http\Controllers\Controller;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\BadResponseException;
 
 class ApiRoles extends Controller
 {
@@ -15,67 +14,35 @@ class ApiRoles extends Controller
     }
 
     public function getAll() {
-        $authRoute = env('SIEP_AUTH_API').'/acl/role';
-        $params = [
-            'token' => $this->token
-        ];
+        $api = new ApiConsume(env('SIEP_AUTH_API'));
+        $api->tokenHeader(ApiLogin::token());
+        $params['page'] = request('users_page');
+        $api->get("acl/role",$params);
+        if($api->hasError()) { return $api->getError(); }
+        $response = $api->response();
 
-        try {
-            $guzzle = new Client();
-            $consumeApi = $guzzle->request('get',$authRoute,['query' => $params]);
-
-            // Obtiene el contenido de la respuesta, la transforma a json
-            $content = $consumeApi->getBody()->getContents();
-            $req = json_decode($content,true);
-        } catch (BadResponseException $ex) {
-            $content = $ex->getResponse();
-            $error = json_decode($content->getBody(), true);
-            return $error;
-        }
-
-        return $req;
+        return $response;
     }
     
     public function addRole($name) {
-        $authRoute = env('SIEP_AUTH_API').'/acl/role';
-        $params = [
-            'token' => $this->token,
-            'name' => $name
-        ];
-        try {
-            $guzzle = new Client();
-            $consumeApi = $guzzle->request('post',$authRoute,['query' => $params]);
+        $api = new ApiConsume(env('SIEP_AUTH_API'));
+        $api->tokenHeader(ApiLogin::token());
+        $params['name'] = $name;
+        $api->post("acl/role",$params);
+        if($api->hasError()) { return $api->getError(); }
+        $response = $api->response();
 
-            // Obtiene el contenido de la respuesta, la transforma a json
-            $content = $consumeApi->getBody()->getContents();
-            $req = json_decode($content,true);
-        } catch (BadResponseException $ex) {
-            $content = $ex->getResponse();
-            $error = json_decode($content->getBody(), true);
-            return $error;
-        }
-
-        return $req;
+        return $response;
     }
-    public function delRole($id) {
-        $authRoute = env('SIEP_AUTH_API').'/acl/role';
-        $params = [
-            'token' => $this->token,
-            'id' => $id
-        ];
-        try {
-            $guzzle = new Client();
-            $consumeApi = $guzzle->request('destroy',$authRoute,['query' => $params]);
 
-            // Obtiene el contenido de la respuesta, la transforma a json
-            $content = $consumeApi->getBody()->getContents();
-            $req = json_decode($content,true);
-        } catch (BadResponseException $ex) {
-            $content = $ex->getResponse();
-            $error = json_decode($content->getBody(), true);
-            return $error;
-        }
+    public function delRole($name) {
+        $api = new ApiConsume(env('SIEP_AUTH_API'));
+        $api->tokenHeader(ApiLogin::token());
+        $params['name'] = $name;
+        $api->delete("acl/role",$params);
+        if($api->hasError()) { return $api->getError(); }
+        $response = $api->response();
 
-        return $req;
-    }
+        return $response;
+   }
 }
