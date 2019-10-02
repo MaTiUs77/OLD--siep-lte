@@ -1,5 +1,21 @@
 @php
+    // Configuracion inicial del componente
+    $total = 0;
+    $data = [];
+    $search = $table_name."_table_search";
+    $link = $table_name."_table_page";
+
+    if(!isset($table_name)) {
+        $table_name = rand(0,10000000);
+    }
+
     $route = strtolower($titulo);
+
+    if(count($items) && !isset($items['error'])) {
+        $total = $items['total'];
+        $data = $items['data'];
+        $resource = 'users';
+    }
 @endphp
 
 @if(isset($items['error']))
@@ -7,18 +23,21 @@
         Respuesta de API
     </p>
    <code>{{ $items['error'] }}</code>
-@else
+@endif
+
+@if(!isset($items['error']))
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">{{ $titulo }} en total: {{ $items['total'] }}</h3>
+            <h3 class="box-title">{{ $titulo }} en total: {{ $total }}</h3>
             <div class="box-tools">
+                <form class="GET" action="?">
                 <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control pull-right" placeholder="Buscar">
-
-                    <div class="input-group-btn">
-                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                    </div>
+                        <input type="text" name="{{ $search }}" class="form-control pull-right" placeholder="Buscar">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
                 </div>
+                </form>
             </div>
         </div>
         <!-- /.box-header -->
@@ -35,7 +54,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($items['data'] as $item)
+                @foreach($data as $item)
                     <tr>
                         <td style="width: 50px">{{ $item['id'] }}</td>
                         <td>{{ $item['username'] }}</td>
@@ -43,12 +62,15 @@
                         <td>{{ $item['puesto'] }}</td>
                         <td>{{ $item['email'] }}</td>
                         <td>{{ $item['centro']['nombre'] }}</td>
+
+                        @rol('superadmin')
                         <td style="width: 50px">
-                            <a href="{{ url("acl/{$route}/edit",$item['id']) }}" class="btn btn-sm btn-default btn-block"><i class="fa fa-edit"></i></a>
+                            <a href="{{ url("admin/{$resource}",$item['id']) }}" class="btn btn-sm btn-default btn-block"><i class="fa fa-edit"></i></a>
                         </td>
                         <td style="width: 50px">
-                            <a href="{{ url("acl/{$route}/delete",$item['id']) }}" class="btn btn-sm btn-danger btn-block"><i class="fa fa-trash"></i></a>
+                            <a href="{{ url("admin/{$resource}",$item['id']) }}" class="btn btn-sm btn-danger btn-block"><i class="fa fa-trash"></i></a>
                         </td>
+                        @endrol
                     </tr>
                 @endforeach
                 </tbody>
@@ -56,9 +78,8 @@
 
             @include('core.pagination',[
               'data' => $items,
-              'page_link' => 'users_page'
+              'page_link' => $link
             ])
-
         </div>
         <!-- /.box-body -->
     </div>

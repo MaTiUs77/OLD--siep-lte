@@ -12,12 +12,14 @@ Route::group(['middleware'=>'auth.api'],function(){
     //--- Rutas de pagina ADMIN ---//
     Route::prefix('admin')->group(function () {
         Route::get('/', 'View\Admin\Admin@index')->name('admin');
+        Route::resource('/users', 'View\Admin\AdminUsers');
         Route::resource('/roles', 'View\Admin\AdminRoles');
     });
 
     Route::resource('inscripciones', 'View\Inscripciones');
     Route::resource('promocionados', 'View\Promocionados');
     Route::resource('repitentes', 'View\Repitentes');
+    Route::resource('pases', 'View\Pases');
 
     Route::resource('centros', 'View\Centros');
     Route::resource('secciones', 'View\Secciones');

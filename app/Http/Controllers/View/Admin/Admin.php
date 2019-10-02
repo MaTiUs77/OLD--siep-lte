@@ -19,7 +19,11 @@ class Admin extends Controller
         $reqPermisos = new ApiPermisos($token);
         $reqCiclos = new ApiCiclos($token);
 
-        $users = $reqUsers->getAll();
+        $users = $reqUsers->getAll([
+            'page' => request('users_table_page'),
+            'find' => request('users_table_search')
+        ]);
+
         $roles = $reqRoles->getAll();
         $permisos = $reqPermisos->getAll();
         $ciclos = $reqCiclos->getAll();

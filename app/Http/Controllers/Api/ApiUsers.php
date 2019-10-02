@@ -13,12 +13,22 @@ class ApiUsers extends Controller
         $this->token = $token;
     }
 
-    public function getAll()
+    public function getAll($params=[])
     {
         $api = new ApiConsume(env('SIEP_AUTH_API'));
         $api->tokenHeader(ApiLogin::token());
-        $params['page'] = request('users_page');
         $api->get("acl/users",$params);
+        if($api->hasError()) { return $api->getError(); }
+        $response = $api->response();
+
+        return $response;
+    }
+
+    public function getId($id,$params=[])
+    {
+        $api = new ApiConsume(env('SIEP_AUTH_API'));
+        $api->tokenHeader(ApiLogin::token());
+        $api->get("acl/users/{$id}",$params);
         if($api->hasError()) { return $api->getError(); }
         $response = $api->response();
 

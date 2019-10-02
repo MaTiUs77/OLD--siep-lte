@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Api\Util\ApiConsume;
 use App\Http\Controllers\Controller;
 
-class ApiPermisos extends Controller
+class ApiTrayectoria extends Controller
 {
     public $token;
     public function __construct($token)
@@ -13,12 +13,10 @@ class ApiPermisos extends Controller
         $this->token = $token;
     }
 
-    // Comuncacion con resource Auth API
-    public function getAll() {
-        $api = new ApiConsume(env('SIEP_AUTH_API'));
-        $api->tokenHeader(ApiLogin::token());
+    public function get($personaId) {
+        $api = new ApiConsume();
         $params = [];
-        $api->get("acl/permission",$params);
+        $api->get("api/v1/personas/{$personaId}/trayectoria",$params);
         if($api->hasError()) { return $api->getError(); }
         $response = $api->response();
 
