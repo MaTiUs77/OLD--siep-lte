@@ -4,6 +4,7 @@ namespace App\Http\Controllers\View;
 use App\Http\Controllers\Api\ApiCiclos;
 use App\Http\Controllers\Api\ApiInscripciones;
 use App\Http\Controllers\Api\ApiLogin;
+use App\Http\Controllers\Api\ApiTrayectoria;
 use App\Http\Controllers\Api\Util\ApiConsume;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -39,9 +40,6 @@ class Inscripciones extends Controller
         $token = ApiLogin::token();
 
         $relaciones = [
-            'inscripcion.alumno.inscripciones.centro',
-            'inscripcion.alumno.inscripciones.curso',
-            'inscripcion.alumno.inscripciones.user',
             'inscripcion.alumno.familiares.familiar.persona.ciudad'
         ];
         $params = request()->all();
@@ -56,16 +54,17 @@ class Inscripciones extends Controller
                 'error' => $api->error
             ]);
         } else {
-            $curso = $data['inscripcion'];
             $inscripcion = $data['inscripcion'];
+
             $centro = $inscripcion['centro'];
             $alumno= $inscripcion['alumno'];
             $persona= $alumno['persona'];
-
-            $trayectoria_alumno = $alumno['inscripciones'];
             $familiares = $alumno['familiares'];
 
-            $data = compact('curso','inscripcion','centro','alumno','persona','trayectoria_alumno','familiares');
+            $api = new ApiTrayectoria($token);
+            $trayectoria_alumno = $api->get($persona['id']);
+
+            $data = compact('inscripcion','centro','alumno','persona','familiares','trayectoria_alumno');
         }
 
         return view('inscripciones.view',$data);

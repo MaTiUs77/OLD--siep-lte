@@ -22,14 +22,15 @@ class Home extends Controller
         $token = ApiLogin::token();
         $user = ApiLogin::user();
 
-        $queryPorNivel = compact('estado_inscripcion');
+        $queryPorNivel = compact('ciclo','estado_inscripcion');
+
 
         $apiCiclos = new ApiCiclos($token);
         $ciclos = $apiCiclos->getAll();
         $ciclos =  $ciclos['ciclos'];
 
         $apiMatCuantitativa = new ApiMatriculasCuantitativas($token);
-        $matPorNivel = collect($apiMatCuantitativa->getPorNivel($ciclo,$queryPorNivel));
+        $matPorNivel = collect($apiMatCuantitativa->getPorNivel($queryPorNivel));
 
         return view('index',compact('ciclo','estado_inscripcion','ciclos','user','matPorNivel'));
     }

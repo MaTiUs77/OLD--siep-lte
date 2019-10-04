@@ -3,12 +3,11 @@ namespace App\Http\Controllers\View;
 
 use App\Http\Controllers\Api\ApiCiclos;
 use App\Http\Controllers\Api\ApiLogin;
-use App\Http\Controllers\Api\ApiPromocionados;
-use App\Http\Controllers\Api\Util\ApiConsume;
+use App\Http\Controllers\Api\ApiPases;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 
-class Promocionados extends Controller
+class Pases extends Controller
 {
     public function index()
     {
@@ -26,17 +25,17 @@ class Promocionados extends Controller
         $params = array_merge($default,$params);
 
         $token = ApiLogin::token();
-        $api = new ApiPromocionados($token);
-        $promocionados = $api->getAll($ciclo);
+        $api = new ApiPases($token);
+        $pases = $api->getAll($ciclo);
 
         // Todos los ciclos
         $apiCiclos = new ApiCiclos($token);
         $ciclos = $apiCiclos->getAll();
         $ciclos =  $ciclos['ciclos'];
 
-        $data = compact('promocionados','ciclo','ciclos');
+        $data = compact('pases','ciclo','ciclos');
         $data['estado_inscripcion'] = $params['estado_inscripcion'];
 
-        return view('promocionados.index',$data);
+        return view('pases.index',$data);
     }
 }

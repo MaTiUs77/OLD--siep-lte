@@ -26,7 +26,7 @@
               <div class="col-md-9">
                   <div class="nav-tabs-custom">
                       <ul class="nav nav-tabs">
-                          <li class="active"><a href="#trayectoria" data-toggle="tab" aria-expanded="true">Trayectoria en el centro</a></li>
+                          <li class="active"><a href="#trayectoria" data-toggle="tab" aria-expanded="true">Trayectoria</a></li>
                           <li class=""><a href="#familiares" data-toggle="tab" aria-expanded="false">Familiares</a></li>
                       </ul>
                       <div class="tab-content">
@@ -60,12 +60,7 @@
                           </div>
                           <!-- /.tab-pane -->
                           <div class="tab-pane active" id="trayectoria">
-                              <!-- The timeline -->
-                              <ul class="timeline timeline-inverse">
-                                  @foreach($trayectoria_alumno as $trayectoria)
-                                      @include('inscripciones.componentes.timeline_slot')
-                                  @endforeach
-                              </ul>
+                              @include('inscripciones.componentes.trayectoria',['trayectoria'=>$trayectoria_alumno['alumnos']])
                           </div>
                           <!-- /.tab-pane -->
                       </div>
