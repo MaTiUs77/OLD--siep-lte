@@ -15,8 +15,12 @@ class Secciones extends Controller
 {
     public function index()
     {
-        //$ciclo = Carbon::now()->year;
-        $ciclo = 2020;
+        $ciclo = Carbon::now()->year;
+
+        if(request('ciclo')) {
+            $ciclo =  request('ciclo');
+        }
+
 
         $params = request()->all();
         $default = [

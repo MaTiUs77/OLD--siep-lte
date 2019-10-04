@@ -19,6 +19,7 @@ class ApiConsume extends Controller
 
     private $error;
     private $response;
+    private $download = false;
 
     public function __construct($host=null)
     {
@@ -29,6 +30,10 @@ class ApiConsume extends Controller
         }
 
         $this->cakeHeader();
+    }
+
+    public function forceDownload() {
+        $this->download = true;
     }
 
     public function hasError() {
@@ -73,9 +78,14 @@ class ApiConsume extends Controller
             $guzzle = new Client($this->headers);
             $consumeApi = $guzzle->request($method,$this->consume_route,['query' => $params]);
 
-            // Obtiene el contenido de la respuesta, la transforma a json
             $content = $consumeApi->getBody()->getContents();
-            $req = json_decode($content,true);
+
+            if($this->download) {
+                $req = $content;
+            } else {
+                // Obtiene el contenido de la respuesta, la transforma a json
+                $req = json_decode($content,true);
+            }
         } catch (BadResponseException $ex) {
             $content = $ex->getResponse();
             $jsonBody = json_decode($content->getBody(), true);
