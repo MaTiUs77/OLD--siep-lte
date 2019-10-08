@@ -37,7 +37,10 @@
               <td>{{ $dt['varones'] }}</td>
               <td>{{ $dt['confirmadas'] }}</td>
               <td>
-                  <a href="{{ route('secciones.show',$dt['curso_id']) }}" class="btn btn-sm btn-primary btn-block"><i class="fa fa-eye"></i>
+                  <a href="{{ route('secciones.show',[
+                        'curso_id'=>$dt['curso_id'],
+                        'ciclo'=>$ciclo
+                      ]) }}" class="btn btn-sm btn-primary btn-block"><i class="fa fa-eye"></i>
               </td>
           </tr>
           @endforeach

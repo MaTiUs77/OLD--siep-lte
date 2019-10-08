@@ -2,27 +2,28 @@
 
 namespace App\Http\Controllers\Api\Util;
 
+use App\Http\Controllers\Api\ApiLogin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
 class BladeHelper extends Controller
 {
     public static function bladeRol($rol) {
-        $user = session('user');
+        $user = ApiLogin::user();
         $roles = $user['acl']['roles'];
         $access = collect($roles)->contains($rol);
         return $access;
     }
 
     public static function bladePermiso($permiso) {
-        $user = session('user');
+        $user = ApiLogin::user();
         $permisos = $user['acl']['permisos'];
         $access = collect($permisos)->contains($permiso);
         return $access;
     }
 
     public static function bladeUser() {
-        if(session('user') === null) {
+        if(ApiLogin::user() === null) {
             return false;
         } else {
             return true;

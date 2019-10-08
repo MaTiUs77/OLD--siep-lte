@@ -16,3 +16,5 @@ supervisord\.pid
 supervisord\.log
 
 storage/app/public/master\.json
+
+package-lock\.json

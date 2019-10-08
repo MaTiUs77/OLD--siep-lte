@@ -41,6 +41,7 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 --}}
+  @yield('endcss')
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body class="hold-transition skin-purple layout-top-nav">
@@ -49,7 +50,7 @@
   @include('core.header')
   <!-- Full Width Column -->
   <div class="content-wrapper">
-    <div >
+    <div id="vuelte">
 	@yield('contenido')
     </div>
     <!-- /.container -->
@@ -91,6 +92,8 @@
 <!-- DataTables -->
 <script src="{{ asset('lte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('lte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+
+<script src="{{ mix('/js/app.js') }}"></script>
 
 @yield('endjs')
 </body>
