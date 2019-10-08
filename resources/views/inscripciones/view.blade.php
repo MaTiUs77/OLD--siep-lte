@@ -18,10 +18,6 @@
           <div class="row">
               <div class="col-md-3">
                   @include('inscripciones.componentes.card_persona')
-
-                  <a href="?" class="btn btn-primary btn-block">Constancia de Inscripción</a>
-                  <a href="?" class="btn btn-primary btn-block">Constancia de Alumno Regular</a>
-
               </div>
               <div class="col-md-9">
                   <div class="nav-tabs-custom">

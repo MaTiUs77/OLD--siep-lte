@@ -8,97 +8,61 @@
   <i class="fa fa-user bg-blue"></i>
   <div class="timeline-item">
       <div class="timeline-body">
-          <div class="box box-widget widget-user">
-                  <div class="widget-user-header bg-blue-active">
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="box box-widget widget-user">
+                      <div class="widget-user-header bg-blue-active">
                      <span class="pull-right">
                         <small>
                             #{{ $inscripcion['id'] }}
                         </small>
                       </span>
 
-                      <h5 class="widget-user-desc">{{ $inscripcion['tipo_inscripcion'] }}</h5>
-                      <h4>{{ $inscripcion['centro']['nombre'] }}</h4>
-                      @foreach($inscripcion['curso'] as $curso)
-                          {{ $curso['anio'] }}
-                          {{ $curso['division'] }}
-                          {{ $curso['turno'] }}
-                      @endforeach
-                  </div>
-                  <div class="box-footer no-padding">
-                      <div class="row">
-                          <div class="col-sm-6 border-right">
-                              <div class="description-block">
-                                  <span class="description-text">{{ $inscripcion['legajo_nro'] }}</span>
+                          <h5 class="widget-user-desc">{{ $inscripcion['tipo_inscripcion'] }}</h5>
+                          <h4>{{ $inscripcion['centro']['nombre'] }}</h4>
+                          @foreach($inscripcion['curso'] as $curso)
+                              <div>
+                                  {{ $curso['anio'] }}
+                                  {{ $curso['division'] }}
+                                  {{ $curso['turno'] }}
                               </div>
-                              <!-- /.description-block -->
-                          </div>
-                          <!-- /.col -->
-                          <div class="col-sm-6">
-                              <div class="description-block">
-                                  <span class="description-text">{{ $inscripcion['estado_inscripcion'] }}</span>
-                              </div>
-                              <!-- /.description-block -->
-                          </div>
-                          <!-- /.col -->
-                          @isset($inscripcion['promocion_id'])
-                          <div class="col-sm-12">
-                              <div class="description-block">
-                                  <span class="description-text">Promocion: #{{ $inscripcion['promocion_id'] }}</span>
-                              </div>
-                              <!-- /.description-block -->
-                          </div>
-                          <!-- /.col -->
-                          @endisset
-                          @isset($inscripcion['repitencia_id'])
-                          <div class="col-sm-12">
-                              <div class="description-block">
-                                  <span class="description-text">Repitencia: #{{ $inscripcion['repitencia_id'] }}</span>
-                              </div>
-                              <!-- /.description-block -->
-                          </div>
-                          <!-- /.col -->
-                          @endisset
-
-                          @isset($inscripcion['tipo_baja'])
-                          <div class="col-sm-12">
-                              <div class="description-block">
-                                  <span class="description-text">Tipo: {{ $inscripcion['tipo_baja'] }}</span>
-                              </div>
-                              <!-- /.description-block -->
-                          </div>
-                          @endisset
-
-                          @isset($inscripcion['fecha_baja'])
-                          <div class="col-sm-12">
-                              <div class="description-block">
-                                  <span class="description-text">Fecha: {{ $inscripcion['fecha_baja'] }}</span>
-                              </div>
-                              <!-- /.description-block -->
-                          </div>
-                          @endisset
-
-                          @isset($inscripcion['motivo_baja'])
-                          <div class="col-sm-12">
-                              <div class="description-block">
-                                  <span class="description-text">Motivo: {{ $inscripcion['motivo_baja'] }}</span>
-                              </div>
-                              <!-- /.description-block -->
-                          </div>
-                          @endisset
-
-                          @if(!empty($inscripcion['observaciones']))
-                          <div class="col-sm-12">
-                              <div class="description-block">
-                                  <span class="description-text">Observaciones: {{ $inscripcion['observaciones'] }}</span>
-                              </div>
-                              <!-- /.description-block -->
-                          </div>
-                          @endif
-
+                              <small>
+                                  {{ $curso['tipo'] }}
+                              </small>
+                          @endforeach
                       </div>
+                      <div class="box-footer no-padding">
+                          <div class="row">
+                              <div class="col-sm-6 border-right">
+                                  <div class="description-block">
+                                      <span class="description-text">{{ $inscripcion['legajo_nro'] }}</span>
+                                  </div>
+                                  <!-- /.description-block -->
+                              </div>
+                              <!-- /.col -->
+                              <div class="col-sm-6">
+                                  <div class="description-block">
+                                      <span class="description-text">{{ $inscripcion['estado_inscripcion'] }}</span>
+                                  </div>
+                                  <!-- /.description-block -->
+                              </div>
+                              <!-- /.col -->
+                              @include('inscripciones.componentes.trayectoria_extra')
+                          </div>
+                      </div>
+                      <!-- /.row -->
                   </div>
-                  <!-- /.row -->
               </div>
+              <div class="col-md-12">
+                  <div class="box box-primary">
+                      <div class="box-body">
+                          <a href="{{ route('constancia.inscripcion',[$inscripcion['id']]) }}" class="btn btn-default btn-block" target="_blank">Constancia de Inscripción</a>
+                          <a href="{{ route('constancia.regular',[$inscripcion['id']]) }}" class="btn btn-default btn-block" target="_blank">Constancia de Alumno Regular</a>
+                      </div>
+                      <!-- /.box-body -->
+                  </div>
+              </div>
+          </div>
       </div>
   </div>
 </li>

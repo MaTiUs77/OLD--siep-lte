@@ -23,5 +23,10 @@ Route::group(['middleware'=>'auth.api'],function(){
 
     Route::resource('centros', 'View\Centros');
     Route::resource('secciones', 'View\Secciones');
+
+    Route::prefix('constancia')->group(function () {
+        Route::get('/{id}', 'View\Constancias@inscripcion')->name('constancia.inscripcion');
+        Route::get('/{id}/regular', 'View\Constancias@inscripcion_regular')->name('constancia.regular');
+    });
 });
 //--- End Rutas con autentificacion ---//
