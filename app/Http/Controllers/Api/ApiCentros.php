@@ -16,10 +16,6 @@ class ApiCentros extends Controller
     public function getAll($params=[])
     {
         $api = new ApiConsume();
-        $default = [
-
-        ];
-        $params = array_merge($default,$params);
         $api->get("api/v1/centros",$params);
         if($api->hasError()) { return $api->getError(); }
         $response = $api->response();
@@ -30,10 +26,6 @@ class ApiCentros extends Controller
     public function getId($id,$params=[])
     {
         $api = new ApiConsume();
-        $default = [
-        ];
-        $params = array_merge($default,$params);
-
         $api->get("api/v1/centros/{$id}",$params);
         if($api->hasError()) { return $api->getError(); }
         $response = $api->response();

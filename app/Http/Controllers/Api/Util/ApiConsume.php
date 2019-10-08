@@ -21,8 +21,11 @@ class ApiConsume extends Controller
     private $response;
     private $download = false;
 
-    public function __construct($host=null)
+    public function __construct($host=null, $token=null)
     {
+        if($token) {
+            $this->tokenHeader($token);
+        }
         if($host) {
             $this->host = $host;
         } else {

@@ -14,6 +14,7 @@ Route::group(['middleware'=>'auth.api'],function(){
         Route::get('/', 'View\Admin\Admin@index')->name('admin');
         Route::resource('/users', 'View\Admin\AdminUsers');
         Route::resource('/roles', 'View\Admin\AdminRoles');
+        Route::resource('/permisos', 'View\Admin\AdminPermisos');
     });
 
     Route::resource('inscripciones', 'View\Inscripciones');

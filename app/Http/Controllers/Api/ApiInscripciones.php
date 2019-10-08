@@ -18,12 +18,13 @@ class ApiInscripciones extends Controller
 
     public function getAll($params=[])
     {
-        $api = new ApiConsume();
         $default = [
             'ciclo' => Carbon::now()->year,
             'estado_inscripcion' => 'CONFIRMADA'
         ];
-        $params = array_merge($default,$params);
+
+        $api = new ApiConsume();
+        $params= array_merge($default,$params);
         $api->get("api/v1/inscripcion/lista",$params);
 
         if($api->hasError()) { return $this->error = $api->getError(); }

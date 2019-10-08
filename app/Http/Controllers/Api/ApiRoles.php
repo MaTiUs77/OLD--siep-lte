@@ -13,10 +13,8 @@ class ApiRoles extends Controller
         $this->token = $token;
     }
 
-    public function getAll() {
-        $api = new ApiConsume(env('SIEP_AUTH_API'));
-        $api->tokenHeader(ApiLogin::token());
-        $params['page'] = request('users_page');
+    public function getAll($params=[]) {
+        $api = new ApiConsume(env('SIEP_AUTH_API'),$this->token);
         $api->get("acl/role",$params);
         if($api->hasError()) { return $api->getError(); }
         $response = $api->response();
@@ -24,10 +22,10 @@ class ApiRoles extends Controller
         return $response;
     }
     
-    public function addRole($name) {
-        $api = new ApiConsume(env('SIEP_AUTH_API'));
-        $api->tokenHeader(ApiLogin::token());
+    public function add($name) {
         $params['name'] = $name;
+
+        $api = new ApiConsume(env('SIEP_AUTH_API'),$this->token);
         $api->post("acl/role",$params);
         if($api->hasError()) { return $api->getError(); }
         $response = $api->response();
@@ -35,10 +33,9 @@ class ApiRoles extends Controller
         return $response;
     }
 
-    public function delRole($name) {
-        $api = new ApiConsume(env('SIEP_AUTH_API'));
-        $api->tokenHeader(ApiLogin::token());
-        $params['name'] = $name;
+    public function del($id) {
+        $params['id'] = $id;
+        $api = new ApiConsume(env('SIEP_AUTH_API'),$this->token);
         $api->delete("acl/role",$params);
         if($api->hasError()) { return $api->getError(); }
         $response = $api->response();
