@@ -30,6 +30,9 @@
   <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset('lte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
 
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{ asset('lte/bower_components/select2/dist/css/select2.min.css') }}">
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -92,6 +95,9 @@
 <!-- DataTables -->
 <script src="{{ asset('lte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('lte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+
+<!-- Select2 -->
+<script src="{{ asset('lte/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
 
 <script src="{{ mix('/js/app.js') }}"></script>
 

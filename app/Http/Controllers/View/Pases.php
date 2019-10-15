@@ -38,4 +38,11 @@ class Pases extends Controller
 
         return view('pases.index',$data);
     }
+
+    public function create() {
+        $ciclo = Carbon::now()->year;
+        
+        $data = compact('ciclo');
+        return view('pases.create',$data);
+    }
 }
