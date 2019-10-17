@@ -101,6 +101,15 @@
 
 <script src="{{ mix('/js/app.js') }}"></script>
 
+<script>
+  // Permite seleccionar el ID del TAB con un #ANCHORLINK
+  $(function(){
+    if ( document.location.hash) {
+      $('.nav-tabs a[href="' + document.location.hash + '"]').tab ('show');
+    }
+  });
+</script>
+
 @yield('endjs')
 </body>
 </html>

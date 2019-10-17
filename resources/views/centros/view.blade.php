@@ -20,9 +20,8 @@
                       <ul class="nav nav-tabs">
                           <li class="active"><a href="#infogeneral" data-toggle="tab" aria-expanded="true">Informacion general</a></li>
                           <li class=""><a href="#secciones" data-toggle="tab" aria-expanded="false">Secciones</a></li>
+                          <li class=""><a href="#inscripciones" data-toggle="tab" aria-expanded="false">Inscripciones</a></li>
                           <li class=""><a href="#titulaciones" data-toggle="tab" aria-expanded="false">Titulaciones</a></li>
-                          <li class=""><a href="#usuarios" data-toggle="tab" aria-expanded="false">Usuarios</a></li>
-                          <li class=""><a href="#developer" data-toggle="tab" aria-expanded="false">Developer</a></li>
                       </ul>
                       <div class="tab-content">
                           <div class="tab-pane active" id="infogeneral">
@@ -44,11 +43,11 @@
                           </div>
                           <!-- /.tab-pane -->
                           <div class="tab-pane" id="titulaciones">
-                              @include('centros.componentes.tabla_cuantitativa_titulaciones',['data'=>$secciones])
+                            @include('centros.componentes.tabla_cuantitativa_titulaciones',['data'=>$secciones])
                           </div>
                           <!-- /.tab-pane -->
-                          <div class="tab-pane" id="usuarios">
-                              Usuarios...
+                          <div class="tab-pane" id="inscripciones">
+                              @include('secciones.componentes.inscripciones',['data'=>$inscripciones,'page_link'=>'tab_ins_page','page_anchor'=>'inscripciones'])
                           </div>
                           <!-- /.tab-pane -->
                       </div>

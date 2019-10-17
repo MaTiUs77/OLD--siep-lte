@@ -52,7 +52,9 @@
       </table>
 
       @include('core.pagination',[
-        'data' => $inscripciones
+        'data' => $inscripciones,
+        'page_link' => (isset($page_link) ? $page_link : ''),
+        'page_append' => (isset($page_append) ? $page_append : '')
       ])
   </div>
   <!-- /.box-body -->

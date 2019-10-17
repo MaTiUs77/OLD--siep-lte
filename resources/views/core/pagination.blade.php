@@ -1,5 +1,9 @@
 @php
-    if(!isset($page_link)) {
+    $page_append = '';
+
+    if(isset($page_link) && !empty($page_link)) {
+        // Page link seteado...
+    } else {
         $page_link = 'page';
     }
 
@@ -18,12 +22,17 @@
             $printedPg++;
             $link = request()->all();
             $link[$page_link] = $i;
+
+            $thelink = http_build_query($link);
+            if(!empty($page_anchor)) {
+                $thelink = "{$thelink}#{$page_anchor}";
+            }
         @endphp
         @if($printedPg<=3)
             @if($data['current_page']==$i)
-                <li class="active"><a href="?{{ http_build_query($link ) }}">{{ $i }}</a></li>
+                <li class="active"><a href="?{{ $thelink }}">{{ $i }}</a></li>
             @else
-                <li><a href="?{{ http_build_query($link ) }}">{{ $i }}</a></li>
+                <li><a href="?{{ $thelink }}">{{ $i }}</a></li>
             @endif
         @endif
 
@@ -36,9 +45,9 @@
          ($printedPg > 3 && $printedPg < ($data['last_page']-2))
          )
             @if($data['current_page']==$i)
-                <li class="active"><a href="?{{ http_build_query($link ) }}">{{ $i }}</a></li>
+                <li class="active"><a href="?{{ $thelink  }}">{{ $i }}</a></li>
             @else
-                <li><a href="?{{ http_build_query($link ) }}">{{ $i }}</a></li>
+                <li><a href="?{{ $thelink  }}">{{ $i }}</a></li>
             @endif
         @endif
 

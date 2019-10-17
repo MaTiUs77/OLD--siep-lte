@@ -17,6 +17,11 @@
             <!-- /.navbar-collapse -->
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="navbar-search-input" placeholder="Buscar personas">
+                    </div>
+                </form>
                 <ul class="nav navbar-nav">
                     @include('core.header.toolbar')
                 </ul>

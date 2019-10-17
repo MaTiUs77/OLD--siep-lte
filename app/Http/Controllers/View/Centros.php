@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\View;
 
 use App\Http\Controllers\Api\ApiCentros;
+use App\Http\Controllers\Api\ApiInscripciones;
 use App\Http\Controllers\Api\ApiLogin;
 use App\Http\Controllers\Api\ApiMatriculasCuantitativas;
 use App\Http\Controllers\Controller;
@@ -56,8 +57,19 @@ class Centros extends Controller
         $secciones = $api->getPorSeccion($params);
         $secciones = collect($secciones);
 
+        // Lista de inscripciones del centro
+        $apiInscripciones = new ApiInscripciones($token);
+        $paramsInscripciones = [
+            'ciclo' => $ciclo,
+            'centro_id' => $id,
+            'page' => request('tab_ins_page')
+        ];
+
+        $inscripciones = $apiInscripciones->getAll($paramsInscripciones);
+
+
         // Render
-        $data = compact('centro','secciones','ciclo');
+        $data = compact('centro','secciones','ciclo','inscripciones');
         return view('centros.view',$data);
     }
 }
