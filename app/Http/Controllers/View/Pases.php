@@ -2,8 +2,10 @@
 namespace App\Http\Controllers\View;
 
 use App\Http\Controllers\Api\ApiCiclos;
+use App\Http\Controllers\Api\ApiInscripciones;
 use App\Http\Controllers\Api\ApiLogin;
 use App\Http\Controllers\Api\ApiPases;
+use App\Http\Controllers\Api\ApiTrayectoria;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 
@@ -41,8 +43,25 @@ class Pases extends Controller
 
     public function create() {
         $ciclo = Carbon::now()->year;
-        
-        $data = compact('ciclo');
+
+        $pasos = 4;
+        $paso = request('paso');
+        if(!is_numeric($paso)) { $paso = 1; }
+
+        switch ($paso){
+            case '2':
+                $persona_id = request('persona_id');
+                $apiTrayectoria = new ApiTrayectoria(ApiLogin::token());
+                $trayectoria = $apiTrayectoria->get($persona_id);
+            break;
+            case '3':
+                $inscripcion_id = request('inscripcion_id');
+                $apiInscripciones= new ApiInscripciones(ApiLogin::token());
+                $inscripcion = $apiInscripciones->getId($inscripcion_id);
+            break;
+        }
+
+        $data = compact('ciclo','paso','pasos','persona_id','trayectoria','inscripcion');
         return view('pases.create',$data);
     }
 }

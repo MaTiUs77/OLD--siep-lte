@@ -58,6 +58,9 @@
                       <div class="box-body">
                           <a href="{{ route('constancia.inscripcion',[$inscripcion['id']]) }}" class="btn btn-default btn-block" target="_blank">Constancia de Inscripción</a>
                           <a href="{{ route('constancia.regular',[$inscripcion['id']]) }}" class="btn btn-default btn-block" target="_blank">Constancia de Alumno Regular</a>
+                          @if($inscripcion['ciclo']['nombre']==\Carbon\Carbon::now()->year)
+                              <a href="{{ route('pases.create',['inscripcion_id'=>$inscripcion['id'],'paso'=>3]) }}" class="btn btn-default btn-block" target="_blank">Iniciar solicitud de pase</a>
+                          @endif
                       </div>
                       <!-- /.box-body -->
                   </div>
