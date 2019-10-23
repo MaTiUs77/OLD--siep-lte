@@ -82,8 +82,13 @@ class ApiLogin extends Controller
     }
 
     // Static utils
-    public static function user() {
-        return session('user');
+    public static function user($param=null) {
+        $user = session('user');
+        if($param) {
+            return $user[$param];
+        }
+
+        return $user;
     }
     public static function token() {
         return session('token');
