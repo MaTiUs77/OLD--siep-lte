@@ -13,9 +13,8 @@ class ApiTrayectoria extends Controller
         $this->token = $token;
     }
 
-    public function get($personaId) {
+    public function get($personaId,$params=[]) {
         $api = new ApiConsume();
-        $params = [];
         $api->get("api/v1/personas/{$personaId}/trayectoria",$params);
         if($api->hasError()) { return $api->getError(); }
         $response = $api->response();

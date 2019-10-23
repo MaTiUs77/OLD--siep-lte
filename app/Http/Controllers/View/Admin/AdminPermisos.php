@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\View\Admin;
 
 use App\Http\Controllers\Api\ApiLogin;
-use App\Http\Controllers\Api\ApiRoles;
+use App\Http\Controllers\Api\ApiPermisos;
 use App\Http\Controllers\Controller;
 
-class AdminRoles extends Controller
+class AdminPermisos extends Controller
 {
     public function index() {
         abort(503);
@@ -17,7 +17,8 @@ class AdminRoles extends Controller
     }
 
     public function store() {
-        $api = new ApiRoles(ApiLogin::token());
+        $api = new ApiPermisos(ApiLogin::token());
+
         $response = $api->add(request('name'));
         if(isset($response['error'])) {
             return redirect(route('admin'))->withErrors(['admin.api.error'=>$response['error']]);
@@ -27,7 +28,8 @@ class AdminRoles extends Controller
     }
 
     public function destroy($id) {
-        $api = new ApiRoles(ApiLogin::token());
+        $api = new ApiPermisos(ApiLogin::token());
+
         $response = $api->del($id);
         if(isset($response['error'])) {
             return redirect(route('admin'))->withErrors(['admin.api.error'=>$response['error']]);

@@ -24,7 +24,7 @@
                       </ul>
                       <div class="tab-content">
                           <div class="tab-pane active" id="alumnos">
-                              @include('secciones.componentes.inscripciones',['data'=>$inscripciones])
+                              @include('secciones.componentes.inscripciones',['data'=>$inscripciones,'page_link'=>'ins_page'])
                           </div>
                           <!-- /.tab-pane -->
                           <div class="tab-pane" id="titulaciones">

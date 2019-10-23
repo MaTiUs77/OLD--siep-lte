@@ -26,3 +26,31 @@
         <!-- /.container-fluid -->
     </nav>
 </header>
+
+<nav class="bg-navy" id="header_search" style="display:none;">
+    <div class="container">
+        <ul class="nav navbar-nav">
+            <li>
+                <form action="#" method="get" class="sidebar-form">
+                    <div class="input-group">
+                        <input type="text" name="header_search" class="form-control" placeholder="Puede buscar por nombre, legajo, o dni (Alumnos, Familiares)" autocomplete="off">
+                        <span class="input-group-btn">
+                        <button type="submit" class="btn btn-flat">
+                              <i class="fa fa-search"></i>
+                        </button>
+                        </span>
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+@section('endjs')
+    <script>
+        function toggleHeaderSearch() {
+            $('#header_search').toggle();
+        }
+    </script>
+@append

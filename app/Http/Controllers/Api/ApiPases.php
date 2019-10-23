@@ -24,4 +24,15 @@ class ApiPases extends Controller
 
         return $response;
     }
+
+    public function store($params=[]) {
+        $api = new ApiConsume();
+        // Agrega user_id al request
+        $params['user_id'] = ApiLogin::user('id');
+        $api->post("api/v1/pases",$params);
+        if($api->hasError()) { return $api->getError(); }
+        $response = $api->response();
+
+        return $response;
+    }
 }

@@ -46,13 +46,17 @@
 </div>
 <!-- /.box -->
 
+@section('endcss')
+    <!-- page css -->
+    <style>
+        .tabla_bottom {
+            padding:5px;
+        }
+    </style>
+@endsection
+
 @section('endjs')
 <!-- page script -->
-<style>
-    .tabla_bottom {
-        padding:5px;
-    }
-</style>
 <script>
     $(function () {
         var el_tabla_centros = $('#tabla_centros').DataTable({
