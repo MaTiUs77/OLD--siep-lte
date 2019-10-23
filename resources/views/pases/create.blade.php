@@ -4,8 +4,7 @@
      <!-- Breadcrumb -->
       <section class="content-header">
         <h1>
-          Crear pase
-          <small>ciclo {{ $ciclo }}</small>
+          Ciclo {{ $ciclo }}
         </h1>
         <ol class="breadcrumb">
           <li><a href="#"><i class="fa fa-home"></i> Alumnado</a></li>

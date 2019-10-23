@@ -44,6 +44,7 @@ class Pases extends Controller
     public function create() {
         $ciclo = Carbon::now()->year;
 
+        // Numeros de pasos del Wizard
         $pasos = 4;
         $paso = request('paso');
         if(!is_numeric($paso)) { $paso = 1; }
@@ -57,11 +58,24 @@ class Pases extends Controller
             case '3':
                 $inscripcion_id = request('inscripcion_id');
                 $apiInscripciones= new ApiInscripciones(ApiLogin::token());
-                $inscripcion = $apiInscripciones->getId($inscripcion_id);
+                $inscripcion = $apiInscripciones->getId($inscripcion_id,['with'=>'inscripcion.alumno.familiares.familiar.persona']);
             break;
         }
 
         $data = compact('ciclo','paso','pasos','persona_id','trayectoria','inscripcion');
         return view('pases.create',$data);
+    }
+
+    public function store() {
+        $api = new ApiPases(ApiLogin::token());
+        $params = request()->all();
+        if(isset($params['nota_pase_tutor']) && $params['nota_pase_tutor'] == 'on') {
+            $params['nota_pase_tutor'] = true;
+        } else {
+            $params['nota_pase_tutor'] = false;
+        }
+        $params['fecha_vencimiento'] = Carbon::parse($params['fecha_vencimiento'])->format('Y-m-d');
+        $store = $api->store($params);
+        return $store;
     }
 }

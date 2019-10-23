@@ -27,6 +27,8 @@
   <!-- Daterange picker -->
   <link rel="stylesheet" href="{{ asset('lte/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
 
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="{{ asset('lte/plugins/iCheck/all.css') }}">
   <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset('lte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
 
@@ -98,6 +100,9 @@
 
 <!-- Select2 -->
 <script src="{{ asset('lte/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
+
+<!-- iCheck 1.0.1 -->
+<script src="{{ asset('lte/plugins/iCheck/icheck.min.js') }}"></script>
 
 <script src="{{ mix('/js/app.js') }}"></script>
 

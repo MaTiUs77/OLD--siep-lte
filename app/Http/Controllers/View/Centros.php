@@ -62,6 +62,7 @@ class Centros extends Controller
         $paramsInscripciones = [
             'ciclo' => $ciclo,
             'centro_id' => $id,
+            'with' => 'inscripcion.pase',
             'page' => request('tab_ins_page')
         ];
 

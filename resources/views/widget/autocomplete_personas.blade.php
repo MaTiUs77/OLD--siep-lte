@@ -1,7 +1,7 @@
 @php
     $widget_id = rand(0,100000);
 @endphp
-<select id="{{ $widget_id }}" class="form-control autocomplete-personas" name="persona_id"></select>
+<select id="{{ $widget_id }}" class="form-control autocomplete-personas" name="persona_id" style="width: 300px;"></select>
 
 @section('endcss')
     <style>
